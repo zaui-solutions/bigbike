@@ -7,11 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- FIX PART 1: CSS Updates for Height and Stability -->
+    <!-- FIX PART 1: CSS Updates for Height and Stability (REVERTED TO LIKED VERSION) -->
     <style>
         /* Ensure the wrapper is flexible but has a safe minimum height */
         .zaui-widget-wrapper {
-            min-height: 400px; /* Reduced from 600px to be more compact */
+            min-height: 400px; /* Reverted to 400px */
             height: auto;
             position: relative;
             background: #fff;
@@ -25,7 +25,7 @@
         .zaui-widget {
             display: block !important;
             width: 100% !important;
-            /* Start with a smaller height so it fits the viewport */
+            /* Reverted to 600px starting height */
             height: 600px; 
             border: none !important;
             opacity: 1 !important;
@@ -470,6 +470,20 @@
 
                 </div>
             </div>
+            
+            <!-- NEW OPTION 4: Calendar View -->
+            <div class="mb-16 text-center">
+                <h3 class="text-xl font-semibold mb-6 text-gray-600">Option 4: Calendar View for All Tours</h3>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 inline-block">
+                    <h4 class="font-bold mb-4">Check Availability</h4>
+                    <!-- Cleaned up styling for consistency -->
+                    <a class="zaui-embed-button button inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition duration-300" 
+                       href="https://bigbiketours.zaui.net/booking/web/#/default/activities/category/1/availability?">
+                       View Calendar
+                    </a>
+                    <p class="text-xs text-gray-500 mt-2">View availability for all tours</p>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -525,7 +539,7 @@
     </footer>
 
 
-    <!-- FIX PART 3: Advanced JavaScript for Height and Renaming -->
+    <!-- FIX PART 3: Advanced JavaScript for Height and Renaming (REVERTED TO LIKED VERSION) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
@@ -570,7 +584,7 @@
                     if (newHeight) {
                         const iframes = document.querySelectorAll('.zaui-widget');
                         iframes.forEach(iframe => {
-                            // Add a little buffer (50px) to be safe
+                            // Add a little buffer (50px) to be safe (REVERTED BUFFER)
                             iframe.style.height = (parseInt(newHeight) + 50) + 'px';
                         });
                         console.log("Resized iframe to: " + newHeight + "px");
@@ -586,7 +600,7 @@
                 iframes.forEach(iframe => {
                     // If it's still small or default, force it big
                     if (iframe.offsetHeight < 400) {
-                        iframe.style.height = "800px"; // Medium tall to ensure no internal scroll but less whitespace
+                        iframe.style.height = "800px"; // Reverted to taller fallback
                         console.log("Fallback height applied.");
                     }
                 });
