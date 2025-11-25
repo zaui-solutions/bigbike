@@ -7,40 +7,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- FIX PART 1: CSS to prevent flickering & Style Widget -->
+    <!-- FIX PART 1: CSS Updates for Height and Stability -->
     <style>
-        /* This CSS forces the container to remain stable 
-           and overrides any theme animations that hide the widget 
-        */
+        /* Ensure the wrapper is flexible but has a safe minimum height */
         .zaui-widget-wrapper {
-            min-height: 600px; 
+            min-height: 400px; /* Reduced from 600px to be more compact */
+            height: auto;
             position: relative;
             background: #fff;
-            /* FIX FOR SCROLLING: Allow internal scrolling if content overflows */
-            overflow-y: auto; 
-            -webkit-overflow-scrolling: touch;
+            /* Do NOT hide overflow, let it expand */
+            overflow: visible; 
+            transition: height 0.3s ease;
         }
 
-        /* Force Zaui elements to be visible */
+        /* Force Zaui iframe to take full width and behave nicely */
         .zaui-widget-wrapper iframe,
         .zaui-widget {
-            opacity: 1 !important;
-            visibility: visible !important;
-            animation: none !important;
-            transition: none !important;
             display: block !important;
             width: 100% !important;
-            height: 100% !important;
+            /* Start with a smaller height so it fits the viewport */
+            height: 600px; 
+            border: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
-        /* Loading spinner for the widget area */
+        /* Loading spinner positioning */
         .zaui-loader {
             position: absolute;
-            top: 50%;
+            top: 150px;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             color: #ccc;
-            z-index: 1;
+            z-index: 0; /* Behind iframe */
         }
 
         /* Custom scrollbar for itinerary */
@@ -80,7 +79,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative h-[70vh] flex items-center justify-center bg-cover bg-center bg-fixed" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070&auto=format&fit=crop');">
+    <header class="relative h-[70vh] flex items-center justify-center bg-cover bg-center bg-fixed" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://robbreport.com/wp-content/uploads/2020/01/3.jpg?w=1000');">
         <div class="text-center text-white p-4 max-w-4xl mx-auto">
             <span class="bg-orange-600 text-xs font-bold px-3 py-1 rounded uppercase tracking-widest mb-4 inline-block">Best Seller</span>
             <h1 class="text-5xl md:text-7xl font-extrabold mb-6 shadow-sm leading-tight">AMAZING THAILAND</h1>
@@ -124,7 +123,7 @@
     <div class="container mx-auto px-4 py-16">
         <div class="flex flex-col lg:flex-row gap-12">
             
-            <!-- Left Column: Content (Made narrower: w-7/12) -->
+            <!-- Left Column: Content -->
             <div class="lg:w-7/12 space-y-12">
                 
                 <!-- Intro & Gallery 1 -->
@@ -135,8 +134,8 @@
                     </p>
                     
                     <div class="grid grid-cols-2 gap-4 mb-6">
-                        <img src="https://images.unsplash.com/photo-1596423192663-8a9d0d9313b4?q=80&w=1000&auto=format&fit=crop" class="rounded-lg shadow-md h-64 w-full object-cover transform hover:scale-[1.02] transition" alt="Thailand Temple">
-                        <img src="https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?q=80&w=1000&auto=format&fit=crop" class="rounded-lg shadow-md h-64 w-full object-cover transform hover:scale-[1.02] transition" alt="Thai Road">
+                        <img src="https://robbreport.com/wp-content/uploads/2020/01/2.jpg" class="rounded-lg shadow-md h-64 w-full object-cover transform hover:scale-[1.02] transition" alt="Thailand Temple">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLb4fuBoOyBBwGdZu1jiYisju-lc09t0dJ9A&s" class="rounded-lg shadow-md h-64 w-full object-cover transform hover:scale-[1.02] transition" alt="Thai Road">
                     </div>
 
                     <p class="text-gray-600 leading-relaxed">
@@ -187,7 +186,7 @@
                             <span class="absolute -left-11 top-0 bg-orange-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ring-4 ring-white">1</span>
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Chiang Mai – Doi Inthanon – Mae Sariang (278 km)</h3>
                             <p class="text-gray-600 mb-4">Ride to Thailand's highest peak, 2,565 meters above sea level. Visit waterfalls and Royal Pagodas before descending to Mae Sariang near the Myanmar border.</p>
-                            <img src="https://images.unsplash.com/photo-1590595978583-3967cf17d2ea?q=80&w=1000&auto=format&fit=crop" class="rounded-lg h-48 w-full object-cover mb-4" alt="Doi Inthanon">
+                            <img src="https://robbreport.com/wp-content/uploads/2020/01/5.jpg" class="rounded-lg h-48 w-full object-cover mb-4" alt="Doi Inthanon">
                         </div>
 
                         <!-- Day 2 -->
@@ -210,8 +209,8 @@
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Fang – Golden Triangle – Chiang Khong (194 km)</h3>
                             <p class="text-gray-600 mb-4">Visit the Long-neck Karen tribe, Doi Mae Salong tea farms, and the Golden Triangle. Take a long-tail boat on the Mekong River.</p>
                             <div class="grid grid-cols-2 gap-4 mb-4">
-                                <img src="https://images.unsplash.com/photo-1523730205978-59fd1b2965e3?q=80&w=1000&auto=format&fit=crop" class="rounded-lg h-32 w-full object-cover" alt="Mekong River">
-                                <img src="https://images.unsplash.com/photo-1598226062725-b461f845d064?q=80&w=1000&auto=format&fit=crop" class="rounded-lg h-32 w-full object-cover" alt="Tea Plantation">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHaY4PwG5dLDTX2OIA0-IYz3gidt5Ss_v9ng&s" class="rounded-lg h-32 w-full object-cover" alt="Mekong River">
+                                <img src="https://robbreport.com/wp-content/uploads/2020/01/2.jpg" class="rounded-lg h-32 w-full object-cover" alt="Tea Plantation">
                             </div>
                         </div>
 
@@ -220,7 +219,7 @@
                             <span class="absolute -left-11 top-0 bg-gray-200 text-gray-600 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ring-4 ring-white">5</span>
                             <h3 class="text-xl font-bold text-gray-900 mb-2">Chiang Khong – Chiang Rai – Nan (328 km)</h3>
                             <p class="text-gray-600 mb-4">Visit the famous <strong>White Temple (Wat Rong Khun)</strong>. Ride the exhilarating mountainous highway to Nan.</p>
-                            <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=1000&auto=format&fit=crop" class="rounded-lg h-64 w-full object-cover mb-4" alt="White Temple">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLb4fuBoOyBBwGdZu1jiYisju-lc09t0dJ9A&s" class="rounded-lg h-64 w-full object-cover mb-4" alt="White Temple">
                         </div>
 
                         <!-- Day 6-10 Summary -->
@@ -260,18 +259,17 @@
                 <section>
                     <h2 class="text-3xl font-bold mb-6">Tour Gallery</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <img src="https://images.unsplash.com/photo-1524177239274-0f2c0032906e?q=80&w=600&auto=format&fit=crop" class="rounded h-40 w-full object-cover">
-                        <img src="https://images.unsplash.com/photo-1594142388033-0c3098656156?q=80&w=600&auto=format&fit=crop" class="rounded h-40 w-full object-cover">
-                        <img src="https://images.unsplash.com/photo-1520641199343-424422e17e4e?q=80&w=600&auto=format&fit=crop" class="rounded h-40 w-full object-cover">
-                        <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=600&auto=format&fit=crop" class="rounded h-40 w-full object-cover">
-                        <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=600&auto=format&fit=crop" class="rounded h-40 w-full object-cover">
-                        <img src="https://images.unsplash.com/photo-1622312683838-518204631243?q=80&w=600&auto=format&fit=crop" class="rounded h-40 w-full object-cover">
+                        <img src="https://robbreport.com/wp-content/uploads/2020/01/2.jpg" class="rounded h-40 w-full object-cover">
+                        <img src="https://robbreport.com/wp-content/uploads/2020/01/3.jpg?w=1000" class="rounded h-40 w-full object-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLb4fuBoOyBBwGdZu1jiYisju-lc09t0dJ9A&s" class="rounded h-40 w-full object-cover">
+                        <img src="https://robbreport.com/wp-content/uploads/2020/01/5.jpg" class="rounded h-40 w-full object-cover">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHaY4PwG5dLDTX2OIA0-IYz3gidt5Ss_v9ng&s" class="rounded h-40 w-full object-cover">
+                        <img src="https://robbreport.com/wp-content/uploads/2020/01/3.jpg?w=1000" class="rounded h-40 w-full object-cover">
                     </div>
                 </section>
             </div>
 
             <!-- Right Column: Booking Widget (STICKY SIDEBAR) -->
-            <!-- Made wider: lg:w-5/12 (approx 41%) -->
             <div id="booking-section" class="lg:w-5/12">
                 <div class="sticky top-24">
                     
@@ -279,7 +277,7 @@
                     <div class="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-100">
                         
                         <!-- Image Side (Top) -->
-                        <div class="h-[220px] bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1625401586036-79524672691f?q=80&w=1000&auto=format&fit=crop');">
+                        <div class="h-[220px] bg-cover bg-center relative" style="background-image: url('https://robbreport.com/wp-content/uploads/2020/01/5.jpg');">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                             <div class="absolute bottom-0 left-0 p-6 text-white">
                                 <p class="text-sm font-bold text-orange-400 uppercase tracking-widest mb-1">Book Your Ride</p>
@@ -288,7 +286,7 @@
                         </div>
                         
                         <!-- Widget Side (Bottom) -->
-                        <div class="p-0 bg-white" style="height: 650px;">
+                        <div class="p-0 bg-white" style="height: auto;">
                             
                             <!-- Wrapper for Zaui Widget -->
                             <div style="width: 100%; height: 100%;" class="relative">
@@ -300,18 +298,17 @@
                                     <p class="text-xs text-gray-300 mt-2">Connecting to Zaui API...</p>
                                 </div>
 
-                                <!-- REQUIRED SCRIPT -->
-                                <script src="https://bigbiketours.zaui.net/themes/default/js/zaui-embed-api-v1.js"></script>
-
                                 <!-- EMBEDDED IFRAME (Specific ID: 14) -->
+                                <!-- FIX PART 2: scrolling="auto" allows movement, but we fix height with JS -->
                                 <div class="zaui-widget-wrapper">
                                     <iframe 
-                                        id="zaui-widget-activity-iframe" 
+                                        id="zaui-widget-sidebar" 
                                         class="zaui-widget" 
                                         src="https://bigbiketours.zaui.net/booking/web/#/default/widget/activity/14?embedStyle=embeddedframe" 
                                         title="Activity Widget" 
                                         frameBorder="0" 
-                                        scrolling="yes"> <!-- Changed to allow scrolling -->
+                                        allow="clipboard-read; clipboard-write; payment; fullscreen"
+                                        scrolling="auto">
                                     </iframe>
                                 </div>
 
@@ -348,7 +345,7 @@
                 <h3 class="text-xl font-semibold mb-4 text-gray-600">Option 1: Split Layout (Image Left / Widget Right)</h3>
                 <div class="bg-white rounded-xl shadow-2xl grid md:grid-cols-2 overflow-hidden">
                     <!-- Image Side -->
-                    <div class="h-[600px] md:h-auto bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1596423192663-8a9d0d9313b4?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center;">
+                    <div class="h-[800px] md:h-auto bg-cover bg-center" style="background-image: url('https://www.bigbiketours.com/wp-content/uploads/2025/03/bigbikes-8.jpg'); background-size: cover; background-position: center;">
                         <div class="p-6 h-full flex items-end bg-gradient-to-t from-black/60 to-transparent">
                             <div>
                                 <p class="text-2xl font-bold text-white mb-2">Explore Northern Thailand</p>
@@ -357,15 +354,18 @@
                         </div>
                     </div>
                     <!-- Widget Side -->
-                    <div class="p-4 relative" style="height: 600px;">
+                    <div class="p-4 relative" style="height: auto;">
                         <p class="text-xl font-extrabold text-gray-800 mb-2 border-b pb-2">Select Your Dates</p>
-                        <div style="width: 100%; height: 90%;" class="zaui-widget-wrapper">
+                        <div style="width: 100%;" class="zaui-widget-wrapper">
                             <iframe 
+                                id="zaui-widget-split"
+                                class="zaui-widget"
                                 src="https://bigbiketours.zaui.net/booking/web/#/default/widget/activity/14?embedStyle=embeddedframe" 
                                 title="Split Layout Widget" 
                                 frameBorder="0" 
-                                scrolling="yes" 
-                                style="width: 100%; height: 100%; border: none;">
+                                allow="clipboard-read; clipboard-write; payment; fullscreen"
+                                scrolling="auto" 
+                                style="width: 100%; border: none;">
                             </iframe>
                         </div>
                     </div>
@@ -383,16 +383,17 @@
                     <div class="flex flex-col md:flex-row gap-8">
                         <!-- Left: Widget -->
                         <div class="flex-1 w-full">
-                            <div class="zaui-widget-container h-[600px]">
-                                <div class="zaui-widget-wrapper" style="height: 100%;">
+                            <div class="zaui-widget-container">
+                                <div class="zaui-widget-wrapper">
                                     <iframe 
-                                        id="zaui-widget-journey-iframe-27" 
+                                        id="zaui-widget-full" 
                                         class="zaui-widget" 
                                         src="https://bigbiketours.zaui.net/booking/web/#/default/widget/activity/14?embedStyle=embeddedframe" 
                                         title="Full-Width with Benefits" 
                                         frameBorder="0" 
-                                        scrolling="yes"
-                                        style="width: 100%; height: 100%;">
+                                        allow="clipboard-read; clipboard-write; payment; fullscreen"
+                                        scrolling="auto"
+                                        style="width: 100%;">
                                     </iframe>
                                 </div>
                             </div>
@@ -451,7 +452,7 @@
                         <a class="zaui-embed-button button inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full transition duration-300" 
                            style="cursor:pointer;" 
                            href="https://bigbiketours.zaui.net/booking/web/#/default/activity/14?">
-                           Book Now (Popup)
+                           Book This Tour
                         </a>
                         <p class="text-xs text-gray-500 mt-2">Opens in an overlay</p>
                     </div>
@@ -524,42 +525,79 @@
     </footer>
 
 
-    <!-- FIX PART 3: JavaScript to Rename the Button -->
+    <!-- FIX PART 3: Advanced JavaScript for Height and Renaming -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            // Configuration
+            // --- 1. BUTTON RENAMING LOGIC ---
             const TARGET_TEXT = "Add to Cart";
             const NEW_TEXT = "Book This Tour";
             const TARGET_SELECTOR = ".zaui-widget-wrapper";
 
-            // Create an observer instance linked to the callback function
             const observer = new MutationObserver(function(mutationsList, observer) {
-                // Since this uses an iframe, we can only rename buttons if they are 
-                // injected into the main document (modals/sticky footers).
-                // We cannot reach inside the iframe due to browser security (CORS).
-                const candidates = document.querySelectorAll('.btn, .button, button, a');
+                try {
+                    const candidates = document.querySelectorAll('.btn, .button, button, a');
+                    candidates.forEach(function(element) {
+                        if (element.innerText && element.innerText.trim() === TARGET_TEXT) {
+                            console.log("Fix Applied: Renaming button");
+                            element.innerText = NEW_TEXT;
+                            element.classList.add('zaui-custom-book-btn');
+                        }
+                    });
+                } catch (e) { /* Silent fail */ }
+            });
 
-                candidates.forEach(function(element) {
-                    if (element.innerText && element.innerText.trim() === TARGET_TEXT) {
-                        console.log("Fix Applied: Renaming button");
-                        element.innerText = NEW_TEXT;
-                        element.classList.add('zaui-custom-book-btn');
+            const targetNode = document.querySelector(TARGET_SELECTOR) || document.body;
+            observer.observe(document.body, { attributes: false, childList: true, subtree: true });
+
+
+            // --- 2. IFRAME HEIGHT RESIZING LOGIC (THE FIX) ---
+            // Listen for messages from the Zaui widget
+            window.addEventListener('message', function(e) {
+                // Verify the message comes from Zaui (optional security check)
+                // console.log("Received message:", e.data); // Debugging
+
+                // Most widgets send a 'height' property or a specific event type
+                // Zaui specific or general 'resize' event handling
+                if (e.data) {
+                    // Try to find the height in common payloads
+                    let newHeight = null;
+                    
+                    if (e.data.height) newHeight = e.data.height;
+                    else if (e.data.payload && e.data.payload.height) newHeight = e.data.payload.height;
+                    
+                    // If we found a height, apply it to all Zaui iframes
+                    if (newHeight) {
+                        const iframes = document.querySelectorAll('.zaui-widget');
+                        iframes.forEach(iframe => {
+                            // Add a little buffer (50px) to be safe
+                            iframe.style.height = (parseInt(newHeight) + 50) + 'px';
+                        });
+                        console.log("Resized iframe to: " + newHeight + "px");
+                    }
+                }
+            });
+
+            // --- 3. FALLBACK HEIGHT FIX ---
+            // If the message event never fires (common with some cross-domain setups),
+            // we force a very tall height after a few seconds so the user can definitely see content.
+            setTimeout(function() {
+                const iframes = document.querySelectorAll('.zaui-widget');
+                iframes.forEach(iframe => {
+                    // If it's still small or default, force it big
+                    if (iframe.offsetHeight < 400) {
+                        iframe.style.height = "800px"; // Medium tall to ensure no internal scroll but less whitespace
+                        console.log("Fallback height applied.");
                     }
                 });
-            });
+            }, 3000);
 
-            // Start observing
-            const targetNode = document.querySelector(TARGET_SELECTOR) || document.body;
-            observer.observe(document.body, { 
-                attributes: false, 
-                childList: true, 
-                subtree: true 
-            });
-
-            console.log("Zaui Button Fixer Started...");
+            console.log("Zaui Widget Fixes Initialized...");
         });
     </script>
+    
+    <!-- GLOBAL ZAUI SCRIPT -->
+    <script src="https://bigbiketours.zaui.net/themes/default/js/zaui-embed-api-v1.js" defer></script>
 
 </body>
 </html>
